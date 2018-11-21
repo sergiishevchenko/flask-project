@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -12,6 +12,7 @@ class Comments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20))
     comment = db.Column(db.String(1000))
+
 
 @app.route('/')
 def index():
@@ -34,7 +35,7 @@ def process():
     db.session.add(signature)
     db.session.commit()
 
-    return render_template('index.html', name=name, comment=comment)
+    return redirect(url_for('index'))
 
 
 @app.route('/home', methods=['GET', 'POST'])
