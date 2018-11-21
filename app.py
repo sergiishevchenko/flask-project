@@ -16,7 +16,7 @@ class Comments(db.Model):
 @app.route('/')
 def index():
     result = Comments.query.all()
-    
+
     return render_template('index.html', result=result)
 
 
